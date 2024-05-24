@@ -1,4 +1,4 @@
-package com.example.sample_android_paymentstip_mvvm_jetpackcompose.ui.theme
+package com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

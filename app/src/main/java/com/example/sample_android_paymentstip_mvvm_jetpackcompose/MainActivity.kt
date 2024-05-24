@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.sample_android_paymentstip_mvvm_jetpackcompose.ui.theme.SampleAndroidPaymentsTipMVVMJetpackComposeTheme
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.SampleAndroidPaymentsTipMVVMJetpackComposeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

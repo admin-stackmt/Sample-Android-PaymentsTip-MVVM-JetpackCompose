@@ -58,6 +58,7 @@ import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.BuildConfig
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.R
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.colorAppBg
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.colorBorderGrey
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.colorButtonGrey
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.colorOrange
@@ -81,7 +82,7 @@ fun AddPaymentScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(colorAppBg)
     ) {
         Column(
             modifier = Modifier
@@ -131,6 +132,7 @@ fun AmountComponent() {
     Text(
         text = "Enter Amount",
         modifier = Modifier.padding(top = 33.dp),
+        color = Color.White,
         fontSize = 16.sp,
         fontWeight = FontWeight.Bold
     )
@@ -149,6 +151,7 @@ fun AmountComponent() {
     ) {
         Text(
             text = "$",
+            color = Color.White,
             modifier = Modifier
                 .padding(start = 20.dp)
                 .align(Alignment.CenterStart),
@@ -166,7 +169,8 @@ fun AmountComponent() {
             textStyle = TextStyle(
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
-                fontSize = 42.sp
+                fontSize = 42.sp,
+                color = Color.White
             ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
             singleLine = true,
@@ -181,7 +185,6 @@ fun AmountComponent() {
                     fontSize = 42.sp,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
-                    color = colorBorderGrey
                 )
             }
         )
@@ -196,6 +199,7 @@ fun PeopleComponent() {
         text = "How many people?",
         modifier = Modifier.padding(top = 33.dp),
         fontSize = 16.sp,
+        color = Color.White,
         fontWeight = FontWeight.Bold
     )
 
@@ -206,7 +210,7 @@ fun PeopleComponent() {
             .wrapContentHeight()
     ) {
         OutlinedButton(
-            border = BorderStroke(1.dp, color = colorButtonGrey),
+            border = BorderStroke(1.dp, color = colorOrange),
             modifier = Modifier
                 .align(Alignment.CenterStart)
                 .height(71.dp)
@@ -218,7 +222,7 @@ fun PeopleComponent() {
             Text(
                 text = "-", fontSize = 48.sp,
                 fontWeight = FontWeight.Bold,
-                color = colorOrange
+                color = Color.White
             )
         }
         Text(
@@ -226,10 +230,11 @@ fun PeopleComponent() {
             modifier = Modifier
                 .align(Alignment.Center),
             fontSize = 42.sp,
+            color = colorOrange,
             fontWeight = FontWeight.Bold
         )
         OutlinedButton(
-            border = BorderStroke(1.dp, color = colorButtonGrey),
+            border = BorderStroke(1.dp, color = colorOrange),
             modifier = Modifier
                 .align(Alignment.CenterEnd)
                 .height(71.dp)
@@ -241,7 +246,7 @@ fun PeopleComponent() {
             Text(
                 text = "+", fontSize = 48.sp,
                 fontWeight = FontWeight.Bold,
-                color = colorOrange
+                color = Color.White
             )
         }
     }
@@ -256,6 +261,7 @@ fun TipComponent() {
         text = "% TIP",
         modifier = Modifier.padding(top = 33.dp),
         fontSize = 16.sp,
+        color = Color.White,
         fontWeight = FontWeight.Bold
     )
 
@@ -276,8 +282,9 @@ fun TipComponent() {
             modifier = Modifier
                 .padding(end = 20.dp)
                 .align(Alignment.CenterEnd),
+            color = Color.White,
             fontSize = 24.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
         )
         TextField(
             value = viewModel.inputPaymentDtoObservable.value.tipPercent.toString(),
@@ -290,7 +297,8 @@ fun TipComponent() {
             textStyle = TextStyle(
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
-                fontSize = 42.sp
+                fontSize = 42.sp,
+                color = Color.White
             ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = true,
@@ -326,6 +334,7 @@ fun TotalCalculationComponent() {
             text = "Total Tip",
             modifier = Modifier
                 .align(Alignment.CenterStart),
+            color = Color.White,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold
         )
@@ -333,6 +342,7 @@ fun TotalCalculationComponent() {
             text = "$${viewModel.inputCalculationsObservable.value.totalTipAmount}",
             modifier = Modifier
                 .align(Alignment.CenterEnd),
+            color = colorOrange,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold
         )
@@ -348,6 +358,7 @@ fun TotalCalculationComponent() {
             text = "Per Person",
             modifier = Modifier
                 .align(Alignment.CenterStart),
+            color = Color.White,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold
         )
@@ -356,6 +367,7 @@ fun TotalCalculationComponent() {
             modifier = Modifier
                 .align(Alignment.CenterEnd),
             fontSize = 24.sp,
+            color = colorOrange,
             fontWeight = FontWeight.Bold
         )
     }
@@ -400,7 +412,7 @@ fun BoxScope.SavePaymentComponent(
                         color = if (viewModel.inputPaymentDtoObservable.value.isAttachPhotoEnabled) {
                             colorOrange
                         } else {
-                            colorBorderGrey
+                            colorButtonGrey
                         },
                         shape = RoundedCornerShape(7.dp)
                     )
@@ -416,7 +428,7 @@ fun BoxScope.SavePaymentComponent(
                         if (viewModel.inputPaymentDtoObservable.value.isAttachPhotoEnabled) {
                             colorOrange
                         } else {
-                            colorBorderGrey
+                            colorButtonGrey
                         }
                     )
                 )
@@ -427,7 +439,8 @@ fun BoxScope.SavePaymentComponent(
                     .align(Alignment.CenterVertically)
                     .padding(start = 8.dp),
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = colorButtonGrey
             )
         }
         val context = LocalContext.current

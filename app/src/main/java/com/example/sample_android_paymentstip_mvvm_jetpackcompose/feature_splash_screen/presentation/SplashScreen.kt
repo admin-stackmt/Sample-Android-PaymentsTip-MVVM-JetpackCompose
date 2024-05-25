@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.R
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.colorAppBg
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -25,7 +27,8 @@ import kotlinx.coroutines.launch
 fun SplashScreen(navigateToNextScreen: () -> Unit = {}) {
     Surface(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize(),
+        color = colorAppBg
     ) {
         val logoAnimState = remember {
             Animatable(0f)

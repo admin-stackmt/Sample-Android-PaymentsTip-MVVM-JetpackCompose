@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -17,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -26,6 +28,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.AppTheme
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.colorAppBg
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.utils.ui.NavigationConstants
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.feature_home_screen.presentation.addpayment.AddPaymentScreen
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.feature_home_screen.presentation.playmentslist.PaymentsListScreen
@@ -57,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     fun AppNavigation(navigationController: NavHostController) {
         val coroutineScope = rememberCoroutineScope()
         val snackbarHostState by remember { mutableStateOf(SnackbarHostState()) }
-        Scaffold(modifier = Modifier, snackbarHost = {
+        Scaffold(modifier = Modifier.background(colorAppBg), snackbarHost = {
             SnackbarHost(
                 hostState = snackbarHostState
             )
@@ -68,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
+                    .background(colorAppBg)
             ) {
                 LandingPageGraph(navController = navigationController)
                 MainGraph(navController = navigationController, snackbarHostState, coroutineScope)

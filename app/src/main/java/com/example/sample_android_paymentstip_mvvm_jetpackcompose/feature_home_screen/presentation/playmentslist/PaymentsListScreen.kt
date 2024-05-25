@@ -38,7 +38,13 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.R
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.Pink80
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.Purple40
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.Purple80
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.colorAppBg
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.colorBorderGrey
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.colorButtonGrey
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.colorOrange
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.colortextGrey
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.orangeBg
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.utils.PaymentRecordValidatorImpl
@@ -56,8 +62,8 @@ import java.util.Locale
 fun PaymentsListScreen(navigateBack: () -> Unit = {}, showSnackbar: (String) -> Unit = {}) {
     Surface(
         modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
+            .fillMaxSize(),
+        color = colorAppBg
     ) {
         Column {
             ActionBar(navigateBack)
@@ -120,14 +126,16 @@ fun PaymentItemUI(
                 text = convertTimestampToDateString(data.timestamp),
                 modifier = Modifier,
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = Color.White
             )
             Row(modifier = Modifier.padding(top = 16.dp)) {
                 Text(
                     text = "$${data.amount}",
                     modifier = Modifier,
                     fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
                 )
                 Text(
                     text = "Tip: $${
@@ -138,7 +146,7 @@ fun PaymentItemUI(
                     }",
                     modifier = Modifier.padding(start = 16.dp),
                     fontSize = 16.sp,
-                    color = colortextGrey,
+                    color = Color.LightGray,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -170,7 +178,7 @@ fun TotalAmounts() {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .background(orangeBg)
+            .background(Pink80)
     ) {
         val viewModel: PaymentsViewModel = hiltViewModel()
         val paymentsDto = viewModel.paymentsDtoObservable.value
@@ -178,19 +186,22 @@ fun TotalAmounts() {
             text = "Total amount: $${paymentsDto.totalAmount}",
             modifier = Modifier.padding(top = 4.dp, start = 24.dp),
             fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = Color.DarkGray
         )
         Text(
             text = "Total tip: $${paymentsDto.totalTip}",
             modifier = Modifier.padding(top = 4.dp, start = 24.dp),
             fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = Color.DarkGray
         )
         Text(
             text = "Total person: ${paymentsDto.totalPerson}",
             modifier = Modifier.padding(top = 4.dp, start = 24.dp),
             fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = Color.DarkGray
         )
     }
 }
@@ -217,7 +228,8 @@ fun ActionBar(navigateBack: () -> Unit = {}) {
             text = "Saved Payments",
             modifier = Modifier.align(Alignment.Center),
             fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = colorButtonGrey
         )
         Spacer(
             modifier = Modifier

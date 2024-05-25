@@ -13,11 +13,11 @@ val Pink40 = Color(0xFF7D5260)
 
 val colorOrange = Color(0xFFF27A0A)
 val colorOrange2 = Color(0xFFD26E11)
-val colorBorderGrey = Color(0xFFCBCBCB)
+val colorBorderGrey = Color(0x4DCBCBCB)
 val colorButtonGrey = Color(0xFFD2D2D2)
 val colortextGrey = Color(0xFF7D7D7D)
 
 val orangeBg = Color(0xFFF1BD8B)
 
-val colorAppBg = Color(0xFF0A101B)
+val colorAppBg = Color(0xFF0C0A1F)
 val colorWhite = Color(0xFFFFFFFF)

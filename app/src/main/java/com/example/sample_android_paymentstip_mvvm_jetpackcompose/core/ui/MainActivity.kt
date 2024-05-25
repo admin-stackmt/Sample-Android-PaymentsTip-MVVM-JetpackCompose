@@ -4,44 +4,130 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.SampleAndroidPaymentsTipMVVMJetpackComposeTheme
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.AppTheme
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.utils.ui.NavigationConstants
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.feature_home_screen.presentation.addpayment.AddPaymentScreen
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.feature_home_screen.presentation.playmentslist.PaymentsListScreen
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.feature_splash_screen.presentation.SplashScreen
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
-class MainActivity : ComponentActivity() {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            SampleAndroidPaymentsTipMVVMJetpackComposeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+            AppTheme {
+                ApplicationScreen()
+            }
+        }
+    }
+
+    @Preview
+    @Composable
+    fun ApplicationScreen() {
+        val navigationController = rememberNavController()
+        AppNavigation(navigationController)
+    }
+
+    @Composable
+    fun AppNavigation(navigationController: NavHostController) {
+        val coroutineScope = rememberCoroutineScope()
+        val snackbarHostState by remember { mutableStateOf(SnackbarHostState()) }
+        Scaffold(modifier = Modifier, snackbarHost = {
+            SnackbarHost(
+                hostState = snackbarHostState
+            )
+        }) { paddingValues ->
+            NavHost(
+                navController = navigationController,
+                startDestination = NavigationConstants.ROUTE_LANDING,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            ) {
+                LandingPageGraph(navController = navigationController)
+                MainGraph(navController = navigationController, snackbarHostState, coroutineScope)
+            }
+        }
+    }
+
+    fun NavGraphBuilder.LandingPageGraph(navController: NavController) {
+        navigation(
+            startDestination = NavigationConstants.DESTINATION_SCREEN_SPLASH,
+            route = NavigationConstants.ROUTE_LANDING
+        ) {
+            composable(NavigationConstants.DESTINATION_SCREEN_SPLASH) {
+                SplashScreen {
+                    navController.navigate(NavigationConstants.ROUTE_MAIN) {
+                        popUpTo(NavigationConstants.ROUTE_LANDING) {
+                            inclusive = true
+                            saveState = false
+                        }
+                    }
                 }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    fun NavGraphBuilder.MainGraph(
+        navController: NavController,
+        snackbarHostState: SnackbarHostState,
+        coroutineScope: CoroutineScope
+    ) {
+        navigation(
+            startDestination = NavigationConstants.DESTINATION_ADD_PAYMENT,
+            route = NavigationConstants.ROUTE_MAIN
+        ) {
+            composable(NavigationConstants.DESTINATION_ADD_PAYMENT) {
+                AddPaymentScreen(
+                    navigateToSavedPayments = {
+                        navController.navigate(NavigationConstants.DESTINATION_SAVED_PAYMENTS)
+                    }) {
+                    launchSnackBar(snackbarHostState, coroutineScope, message = it)
+                }
+            }
+            composable(NavigationConstants.DESTINATION_SAVED_PAYMENTS) {
+                PaymentsListScreen({
+                    navController.popBackStack()
+                }) {
+                    launchSnackBar(snackbarHostState, coroutineScope, message = it)
+                }
+            }
+        }
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SampleAndroidPaymentsTipMVVMJetpackComposeTheme {
-        Greeting("Android")
+    fun launchSnackBar(
+        snackbarHostState: SnackbarHostState,
+        coroutineScope: CoroutineScope,
+        message: String
+    ) {
+        coroutineScope.launch {
+            snackbarHostState.showSnackbar(message)
+        }
     }
 }
+

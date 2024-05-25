@@ -40,6 +40,7 @@ import coil.compose.rememberImagePainter
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.R
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.colorBorderGrey
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.colortextGrey
+import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui.theme.orangeBg
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.utils.PaymentRecordValidatorImpl
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.utils.PaymentsCalculator
 import com.example.sample_android_paymentstip_mvvm_jetpackcompose.feature_home_screen.data.models.local.SavedPaymentEntity

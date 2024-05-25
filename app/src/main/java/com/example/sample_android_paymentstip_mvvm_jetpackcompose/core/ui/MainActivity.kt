@@ -1,4 +1,4 @@
-package com.example.sample_android_paymentstip_mvvm_jetpackcompose
+package com.example.sample_android_paymentstip_mvvm_jetpackcompose.core.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

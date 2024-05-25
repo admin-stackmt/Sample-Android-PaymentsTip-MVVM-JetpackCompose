@@ -16,7 +16,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.sample_android_paymentstip_mvvm_jetpackcompose.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }

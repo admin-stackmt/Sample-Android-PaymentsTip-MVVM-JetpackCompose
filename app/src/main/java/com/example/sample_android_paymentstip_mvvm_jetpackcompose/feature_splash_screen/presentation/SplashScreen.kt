@@ -31,7 +31,7 @@ fun SplashScreen(navigateToNextScreen: () -> Unit = {}) {
             Animatable(0f)
         }
         Image(
-            painter = painterResource(id = R.drawable.logo_tip_jar),
+            painter = painterResource(id = R.drawable.logo_payments_tip),
             contentDescription = "",
             modifier = Modifier
                 .padding(16.dp)

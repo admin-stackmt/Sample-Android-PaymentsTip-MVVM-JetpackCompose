@@ -18,3 +18,6 @@ val colorButtonGrey = Color(0xFFD2D2D2)
 val colortextGrey = Color(0xFF7D7D7D)
 
 val orangeBg = Color(0xFFF1BD8B)
+
+val colorAppBg = Color(0xFF0A101B)
+val colorWhite = Color(0xFFFFFFFF)

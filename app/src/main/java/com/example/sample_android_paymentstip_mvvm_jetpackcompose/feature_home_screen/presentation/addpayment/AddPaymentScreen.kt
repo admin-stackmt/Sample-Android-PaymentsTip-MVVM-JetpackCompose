@@ -107,7 +107,7 @@ fun AppBarComponent(navigateToSavedPayments: () -> Unit) {
             .wrapContentHeight(align = Alignment.Top)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.logo_tip_jar),
+            painter = painterResource(id = R.drawable.logo_payments_tip),
             contentDescription = "",
             modifier = Modifier.align(Alignment.Center)
         )

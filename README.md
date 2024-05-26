@@ -15,7 +15,7 @@ Leveraging the power of **Jetpack Compose**, this project exemplifies modern And
 - **Tests:** Covers the data and domain layer end to end tests.
 - **Jetpack Compose:** Modern Android UI toolkit for building native UIs with declarative syntax.
 
-![](./clean%20code.webp)
+![](./clean-code.webp)
 
 
 ## Getting Started
